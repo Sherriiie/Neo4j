@@ -33,6 +33,7 @@ def read_data(file_name):
 		props_list.append(props)
 	return props_list
 
+
 def read_artists(file_path):
 	props_list = read_data(file_path)
 	artists = list()
@@ -49,6 +50,7 @@ def read_works(file_path):
 		work = Work(props)
 		works.append(work)
 	return works
+
 
 class Artist(object):
 	def __init__(self, props):
@@ -77,7 +79,6 @@ class Work(object):
 		self.style = props['style']
 		self.owner = props['owner']
 		self.value = props['value']
-
 
 
 if __name__ == "__main__":
