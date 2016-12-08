@@ -12,12 +12,11 @@ sys.setdefaultencoding('utf-8')
 read (author and work) data from xlsx to create object
 '''
 
-
 def read_data(file_name):
 	'''
-	:param file_name: the file to read
-    read all the properties of the author in .xlsx
-    :return
+	read data in the xlsx file, including artists and works
+	:param file_name: the file to read.
+    :return a dict of properties
     '''
 	data = xlrd.open_workbook(file_name)
 	tables = data.sheets()
@@ -33,7 +32,13 @@ def read_data(file_name):
 		props_list.append(props)
 	return props_list
 
+
 def read_artists(file_path):
+	'''
+	read all artists in xlsx
+	:param file_path: file path of artists to read
+	:return:
+	'''
 	props_list = read_data(file_path)
 	artists = list()
 	for props in props_list:
@@ -43,12 +48,18 @@ def read_artists(file_path):
 
 
 def read_works(file_path):
+	'''
+	read all works created by artist in xlsx
+	:param file_path: file path of the works to read
+	:return: a list of kinds of works
+	'''
 	props_list = read_data(file_path)
 	works = list()
 	for props in props_list:
 		work = Work(props)
 		works.append(work)
 	return works
+
 
 class Artist(object):
 	def __init__(self, props):
@@ -77,7 +88,6 @@ class Work(object):
 		self.style = props['style']
 		self.owner = props['owner']
 		self.value = props['value']
-
 
 
 if __name__ == "__main__":
